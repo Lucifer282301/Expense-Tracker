@@ -16,18 +16,17 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      # Force Node.js 22
-      - name: Use Node.js 22
-        run: |
-          curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -
-          sudo apt-get install -y nodejs
-          node -v
-          npm -v
+      # Correct Node setup
+      - name: Setup Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
 
       - name: Install dependencies
         run: |
           cd frontend
-          npm install
+          npm ci
 
       - name: Build project
         run: |
