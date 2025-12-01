@@ -47,7 +47,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: production-files
-          path: frontend/build
+          path: frontend/dist       # <-- Vite default output folder
           if-no-files-found: error
 
   deploy:
@@ -61,11 +61,11 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: production-files
-          path: ./build
+          path: ./dist
 
       # 2. Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.TOKEN }}
-          publish_dir: ./build
+          publish_dir: ./dist       # <-- must match downloaded artifact folder
