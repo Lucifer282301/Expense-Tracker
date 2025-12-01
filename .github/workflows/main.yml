@@ -16,10 +16,8 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Show project structure
-        run: |
-          pwd
-          ls -R .
+      - name: Show structure
+        run: ls -R .
 
       - name: Setup Node
         uses: actions/setup-node@v4
