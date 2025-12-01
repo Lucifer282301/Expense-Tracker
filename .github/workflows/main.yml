@@ -17,12 +17,11 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      # 2. Setup Node.js 22 without root cache
+      # 2. Setup Node.js 22
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: 'none'
 
       # 3. Cache frontend dependencies
       - name: Cache frontend dependencies
