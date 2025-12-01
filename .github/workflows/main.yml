@@ -43,11 +43,12 @@ jobs:
         run: npm run build
 
       # 6. Upload production-ready build files
-      - name: Upload build files
+      - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:
           name: production-files
           path: frontend/build
+          if-no-files-found: error
 
   deploy:
     needs: build
