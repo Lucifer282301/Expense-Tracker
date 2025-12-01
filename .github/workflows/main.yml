@@ -10,15 +10,16 @@ env:
 
 jobs:
   build:
-    name: Build
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: List folders
-        run: ls -R .
+      - name: Show project structure
+        run: |
+          pwd
+          ls -R .
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -36,22 +37,3 @@ jobs:
         with:
           name: production-files
           path: ./build
-
-  deploy:
-    name: Deploy
-    needs: build
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/DEV'
-
-    steps:
-      - name: Download artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: production-files
-          path: ./build
-
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.TOKEN }}
-          publish_dir: ./build
