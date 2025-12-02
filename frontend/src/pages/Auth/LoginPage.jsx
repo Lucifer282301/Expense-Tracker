@@ -1,22 +1,33 @@
 import React, { useState } from "react";
 import AuthLayout from "./../../components/layouts/AuthLayout";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Input from "../../components/inputs/Input";
+import { validateEmail } from "../../utils/helper";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  // const { updateUser } = useContext(UserContext);
-
-  const navigate = useNavigate();
-
   //Handle Login Form Submission Logic
   const handleLogin = async (e) => {
     e.preventDefault();
-    // Add login logic here
+
+    if (!validateEmail(email)) {
+      setError("Please enter a valid email address.");
+      return;
+    }
+
+    if (!password) {
+      setError("Please enter your password.");
+      return;
+    }
+
+    setError("");
+
+    //Login API Call Logic
   };
+
   return (
     <AuthLayout>
       <div className="lg:w-[70%] h-3/4 md:h-full flex flex-col justify-center">
