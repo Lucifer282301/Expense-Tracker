@@ -13,6 +13,8 @@ import IncomePage from "./pages/Dashboard/IncomePage";
 import ExpensePage from "./pages/Dashboard/ExpensePage";
 
 const App = () => {
+  console.log("Hello Yatin");
+
   return (
     <div>
       <Router>
