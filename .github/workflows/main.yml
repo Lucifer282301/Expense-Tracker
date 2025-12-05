@@ -3,7 +3,7 @@ name: Build & Deploy
 on:
   push:
     branches:
-      - DEV
+      - PROD
 
 env:
   CI: false
@@ -50,10 +50,22 @@ jobs:
           path: frontend/dist       # <-- Vite default output folder
           if-no-files-found: error
 
-  deploy:
-    needs: build
+  deploy_backend:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/DEV'
+    needs: build
+    steps:
+      - name: Trigger backend deploy on Render
+        run: |
+          curl -X POST \
+            -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}" \
+            -H "Content-Type: application/json" \
+            -d '{}' \
+            https://api.render.com/v1/services/${{ secrets.RENDER_SERVICE_ID }}/deploys
+
+  deploy_frontend:
+    needs: [build, deploy_backend]
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/PROD'
 
     steps:
       # 1. Download build artifact
