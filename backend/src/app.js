@@ -7,6 +7,7 @@ const ENV = require("./utils/env");
 
 const authRoutes = require("./modules/auth/auth.routes");
 const errorHandler = require("./middleware/error.middleware");
+const incomeRoutes = require("./modules/income/income.routes");
 
 const app = express();
 
@@ -22,6 +23,7 @@ app.use(
 
 app.use("/api/v1/auth", authRoutes);
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+app.use("/api/v1/income", incomeRoutes);
 
 // global error handler
 app.use(errorHandler);
