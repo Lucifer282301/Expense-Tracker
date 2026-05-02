@@ -9,6 +9,7 @@ const authRoutes = require("./modules/auth/auth.routes");
 const errorHandler = require("./middleware/error.middleware");
 const incomeRoutes = require("./modules/income/income.routes");
 const expenseRoutes = require("./modules/expense/expense.routes");
+const dashboardRoutes = require("./modules/dashboard/dashboard.routes");
 
 const app = express();
 
@@ -26,6 +27,7 @@ app.use("/api/v1/auth", authRoutes);
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use("/api/v1/income", incomeRoutes);
 app.use("/api/v1/expense", expenseRoutes);
+app.use("/api/v1/dashboard", dashboardRoutes);
 
 // global error handler
 app.use(errorHandler);
