@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import AuthLayout from "./../../components/layouts/AuthLayout";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Input from "../../components/inputs/Input";
 import { validateEmail } from "../../utils/helper";
+import axiosInstance from "./../../utils/axiosInstance";
+import { API_PATHS } from "../../utils/apiPaths";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   //Handle Login Form Submission Logic
   const handleLogin = async (e) => {
@@ -26,6 +29,27 @@ const LoginPage = () => {
     setError("");
 
     //Login API Call Logic
+    try {
+      const response = await axiosInstance.post(API_PATHS.AUTH.LOGIN, {
+        email,
+        password,
+      });
+      const { accessToken, refreshToken, user } = response.data;
+
+      if (accessToken) {
+        localStorage.setItem("accessToken", accessToken);
+        //  localStorage.setItem("refreshToken", refreshToken);
+        navigate("/dashboard");
+      } else {
+        setError("Login failed. No token received.");
+      }
+    } catch (error) {
+      if (error?.response && error.response?.data?.message) {
+        setError(error.response?.data?.message);
+      } else {
+        setError("Something went wrong. Please try again.");
+      }
+    }
   };
 
   return (
