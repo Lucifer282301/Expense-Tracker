@@ -6,7 +6,7 @@ const generateAccessToken = (id) => {
     throw new Error("JWT_SECRET is missing in environment variables");
   }
   return jwt.sign({ id }, ENV.JWT_SECRET, {
-    expiresIn: "15m",
+    expiresIn: "1d",
   });
 };
 
