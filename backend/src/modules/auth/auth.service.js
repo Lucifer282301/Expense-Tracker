@@ -6,7 +6,7 @@ const {
 } = require("../../utils/token");
 const ApiError = require("../../utils/ApiError");
 
-const register = async ({ fullName, email, password }) => {
+const register = async ({ fullName, email, password, profileImageUrl }) => {
   const existingUser = await User.findOne({ email });
 
   if (existingUser) {
@@ -19,6 +19,7 @@ const register = async ({ fullName, email, password }) => {
     fullName,
     email,
     password: hashed,
+    profileImageUrl,
   });
 
   return {

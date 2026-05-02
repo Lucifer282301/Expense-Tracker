@@ -11,22 +11,25 @@ import RegisterPage from "./pages/Auth/RegisterPage";
 import HomePage from "./pages/Dashboard/HomePage";
 import IncomePage from "./pages/Dashboard/IncomePage";
 import ExpensePage from "./pages/Dashboard/ExpensePage";
+import UserProvider from "./context/UserContext";
 
 const App = () => {
   console.log("Hello Yatin");
 
   return (
     <div>
-      <Router>
-        <Routes>
-          <Route path="/" element={<Root />} />
-          <Route path="/login" exact element={<LoginPage />} />
-          <Route path="/register" exact element={<RegisterPage />} />
-          <Route path="/dashboard" exact element={<HomePage />} />
-          <Route path="/income" exact element={<IncomePage />} />
-          <Route path="/expense" exact element={<ExpensePage />} />
-        </Routes>
-      </Router>
+      <UserProvider>
+        <Router>
+          <Routes>
+            <Route path="/" element={<Root />} />
+            <Route path="/login" exact element={<LoginPage />} />
+            <Route path="/register" exact element={<RegisterPage />} />
+            <Route path="/dashboard" exact element={<HomePage />} />
+            <Route path="/income" exact element={<IncomePage />} />
+            <Route path="/expense" exact element={<ExpensePage />} />
+          </Routes>
+        </Router>
+      </UserProvider>
     </div>
   );
 };

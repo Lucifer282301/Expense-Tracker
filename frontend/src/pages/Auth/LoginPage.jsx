@@ -1,16 +1,19 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import AuthLayout from "./../../components/layouts/AuthLayout";
 import { Link, useNavigate } from "react-router-dom";
 import Input from "../../components/inputs/Input";
 import { validateEmail } from "../../utils/helper";
 import axiosInstance from "./../../utils/axiosInstance";
 import { API_PATHS } from "../../utils/apiPaths";
+import { UserContext } from "../../context/UserContext";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
+
+  const { updateUser } = useContext(UserContext);
 
   //Handle Login Form Submission Logic
   const handleLogin = async (e) => {
@@ -34,11 +37,11 @@ const LoginPage = () => {
         email,
         password,
       });
-      const { accessToken, refreshToken, user } = response.data;
+      const { accessToken, user } = response.data;
 
       if (accessToken) {
         localStorage.setItem("accessToken", accessToken);
-        //  localStorage.setItem("refreshToken", refreshToken);
+        updateUser(user);
         navigate("/dashboard");
       } else {
         setError("Login failed. No token received.");
