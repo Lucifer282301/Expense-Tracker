@@ -14,7 +14,11 @@ const dashboardRoutes = require("./modules/dashboard/dashboard.routes");
 const app = express();
 
 app.use(express.json());
-app.use(helmet());
+app.use(
+  helmet({
+    crossOriginResourcePolicy: { policy: "cross-origin" },
+  }),
+);
 
 app.use(
   cors({
@@ -24,6 +28,12 @@ app.use(
 );
 
 app.use("/api/v1/auth", authRoutes);
+app.use("/uploads", (req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Cross-Origin-Resource-Policy", "cross-origin");
+  next();
+});
+
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use("/api/v1/income", incomeRoutes);
 app.use("/api/v1/expense", expenseRoutes);
