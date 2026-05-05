@@ -4,6 +4,7 @@ const { registerUser, loginUser, getUserInfo } = require("./auth.controller");
 const { protect } = require("../../middleware/auth.middleware");
 const authLimiter = require("../../middleware/rateLimiter");
 const upload = require("../../middleware/upload.middleware");
+const ENV = require("../../utils/env");
 
 const router = express.Router();
 
@@ -17,7 +18,9 @@ router.post("/upload-image", upload.single("image"), (req, res) => {
       return res.status(400).json({ message: "No file uploaded" });
     }
 
-    const imageUrl = `${req.protocol}://${req.get("host")}/uploads/${req.file.filename}`;
+const BASE_URL = ENV.BASE_URL;
+
+const imageUrl = `${BASE_URL}/uploads/${req.file.filename}`;
 
     res.status(200).json({
       success: true,
