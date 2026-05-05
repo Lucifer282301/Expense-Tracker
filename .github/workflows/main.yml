@@ -5,6 +5,9 @@ on:
     branches:
       - PROD
 
+permissions:
+  contents: write
+
 env:
   CI: false
 
@@ -79,5 +82,5 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist       # <-- must match downloaded artifact folder
