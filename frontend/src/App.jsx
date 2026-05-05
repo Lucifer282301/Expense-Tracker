@@ -14,8 +14,6 @@ import ExpensePage from "./pages/Dashboard/ExpensePage";
 import UserProvider from "./context/UserContext";
 
 const App = () => {
-  console.log("Hello Yatin");
-
   return (
     <div>
       <UserProvider>
