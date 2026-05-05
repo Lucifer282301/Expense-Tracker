@@ -9,10 +9,8 @@ const ProfilePhotoSelector = ({ image, setImage }) => {
     const file = e.target.files[0];
 
     if (file) {
-      //Upload the image state
       setImage(file);
 
-      //Generate preview URL from the file
       const preview = URL.createObjectURL(file);
       setPreviewUrl(preview);
     }

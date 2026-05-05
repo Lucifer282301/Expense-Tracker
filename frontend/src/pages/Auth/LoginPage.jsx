@@ -15,7 +15,6 @@ const LoginPage = () => {
 
   const { updateUser } = useContext(UserContext);
 
-  //Handle Login Form Submission Logic
   const handleLogin = async (e) => {
     e.preventDefault();
 
@@ -31,7 +30,6 @@ const LoginPage = () => {
 
     setError("");
 
-    //Login API Call Logic
     try {
       const response = await axiosInstance.post(API_PATHS.AUTH.LOGIN, {
         email,

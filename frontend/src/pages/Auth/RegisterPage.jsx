@@ -19,7 +19,6 @@ const RegisterPage = () => {
 
   const { updateUser } = useContext(UserContext);
 
-  //Handle Sign Up Form Submission Logic
   const handleSignUp = async (e) => {
     e.preventDefault();
 
@@ -42,9 +41,7 @@ const RegisterPage = () => {
 
     setError("");
 
-    //Sign Up API Call
     try {
-      // Upload image if present
       if (profilePic) {
         const imageUploadRes = await uploadImage(profilePic);
         profileImageUrl = imageUploadRes.imageUrl || "";
