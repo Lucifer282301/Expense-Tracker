@@ -16,39 +16,60 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # 1. Checkout repo
       - name: Checkout repo
         uses: actions/checkout@v4
 
+      # 2. Setup Node
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 22
 
+      # 3. Install frontend deps
       - name: Install dependencies
         working-directory: frontend
         run: npm ci
 
+      # 4. Build frontend
       - name: Build project
         working-directory: frontend
         run: npm run build
 
-      - name: Upload build artifact
+      # 5. Upload build
+      - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: production-files
+          name: frontend-build
           path: frontend/dist
+          if-no-files-found: error
 
-  deploy_frontend:
-    needs: build
+  deploy_backend:
     runs-on: ubuntu-latest
+    needs: build
 
     steps:
+      - name: Trigger Render Deploy
+        run: |
+          curl -X POST \
+            -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}" \
+            -H "Content-Type: application/json" \
+            -d '{}' \
+            https://api.render.com/v1/services/${{ secrets.RENDER_SERVICE_ID }}/deploys
+
+  deploy_frontend:
+    runs-on: ubuntu-latest
+    needs: [build, deploy_backend]
+
+    steps:
+      # 1. Download build
       - name: Download artifact
         uses: actions/download-artifact@v4
         with:
-          name: production-files
+          name: frontend-build
           path: dist
 
+      # 2. Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
