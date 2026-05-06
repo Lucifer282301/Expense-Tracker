@@ -18,7 +18,7 @@ const SideMenu = ({ activeMenu }) => {
   const handleLogout = () => {
     localStorage.clear();
     clearUser();
-    window.location.replace("/Expense-Tracker/#/login");
+    navigate("/login");
   };
 
   return (
