@@ -18,12 +18,12 @@ const App = () => {
       <UserProvider>
         <Router>
           <Routes>
-            <Route path="" element={<Root />} />
-            <Route path="login" exact element={<LoginPage />} />
-            <Route path="register" exact element={<RegisterPage />} />
-            <Route path="dashboard" exact element={<HomePage />} />
-            <Route path="income" exact element={<IncomePage />} />
-            <Route path="expense" exact element={<ExpensePage />} />
+            <Route path="/" element={<Root />} />
+            <Route path="/login" exact element={<LoginPage />} />
+            <Route path="/register" exact element={<RegisterPage />} />
+            <Route path="/dashboard" exact element={<HomePage />} />
+            <Route path="/income" exact element={<IncomePage />} />
+            <Route path="/expense" exact element={<ExpensePage />} />
           </Routes>
         </Router>
       </UserProvider>
@@ -38,8 +38,8 @@ const Root = () => {
   const isAuthenticated = !!localStorage.getItem("token");
   // Redirect to dashboard if authenticated, otherwise to login
   return isAuthenticated ? (
-    <Navigate to="dashboard" />
+    <Navigate to="/dashboard" />
   ) : (
-    <Navigate to="login" />
+    <Navigate to="/login" />
   );
 };
