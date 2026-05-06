@@ -18,9 +18,9 @@ router.post("/upload-image", upload.single("image"), (req, res) => {
       return res.status(400).json({ message: "No file uploaded" });
     }
 
-const BASE_URL = ENV.BASE_URL;
+    const BASE_URL = ENV.BASE_URL || `${req.protocol}://${req.get("host")}`;
 
-const imageUrl = `${BASE_URL}/uploads/${req.file.filename}`;
+    const imageUrl = `${BASE_URL}/uploads/${req.file.filename}`;
 
     res.status(200).json({
       success: true,

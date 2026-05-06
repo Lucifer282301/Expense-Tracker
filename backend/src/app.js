@@ -22,7 +22,7 @@ app.use(
 
 app.use(
   cors({
-    origin: ENV.CLIENT_URL,
+    origin: [ENV.CLIENT_URL, "https://lucifer282301.github.io"],
     credentials: true,
   }),
 );
