@@ -31,7 +31,7 @@ axiosInstance.interceptors.response.use(
       if (status === 401) {
         // localStorage.removeItem("accessToken");
         // localStorage.removeItem("refreshToken");
-        window.location.href = "/login";
+        window.location.href = "/Expense-Tracker/#/login";
       } else if (status === 500) {
         console.error("Server error. Please try again later.");
       }
