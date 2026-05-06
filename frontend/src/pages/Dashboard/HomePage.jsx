@@ -75,7 +75,7 @@ const HomePage = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
           <RecentTransactions
             transactions={dashboardData?.recentTransactions}
-            onSeeMore={() => navigate("/expense")}
+            onSeeMore={() => navigate("expense")}
           />
 
           <FinanceOverview
@@ -86,7 +86,7 @@ const HomePage = () => {
 
           <ExpenseTransactions
             transactions={dashboardData?.last30daysExpense?.transactions || []}
-            onSeeMore={() => navigate("/expense")}
+            onSeeMore={() => navigate("expense")}
           />
 
           <Last30DaysExpenses
@@ -102,7 +102,7 @@ const HomePage = () => {
 
           <RecentIncome
             transactions={dashboardData?.last60DaysIncome?.transactions || []}
-            onSeeMore={() => navigate("/income")}
+            onSeeMore={() => navigate("income")}
           />
         </div>
       </div>

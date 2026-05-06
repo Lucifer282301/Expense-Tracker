@@ -40,7 +40,7 @@ const LoginPage = () => {
       if (accessToken) {
         localStorage.setItem("accessToken", accessToken);
         updateUser(user);
-        navigate("/dashboard");
+        navigate("dashboard");
       } else {
         setError("Login failed. No token received.");
       }
@@ -86,7 +86,7 @@ const LoginPage = () => {
 
           <p>
             Don't have an account?{" "}
-            <Link className="font-medium text-primary underline" to="/register">
+            <Link className="font-medium text-primary underline" to="register">
               SignUp
             </Link>
           </p>

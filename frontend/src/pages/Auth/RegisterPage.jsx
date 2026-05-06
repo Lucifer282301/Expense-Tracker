@@ -57,7 +57,7 @@ const RegisterPage = () => {
       if (accessToken) {
         localStorage.setItem("accessToken", accessToken);
         updateUser(user);
-        navigate("/dashboard");
+        navigate("dashboard");
       } else {
         setError("Register failed. No token received.");
       }
@@ -118,7 +118,7 @@ const RegisterPage = () => {
 
           <p>
             Already have an account?{" "}
-            <Link className="font-medium text-primary underline" to="/login">
+            <Link className="font-medium text-primary underline" to="login">
               Login
             </Link>
           </p>
