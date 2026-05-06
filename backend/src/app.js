@@ -16,7 +16,24 @@ const app = express();
 app.use(express.json());
 app.use(
   helmet({
-    contentSecurityPolicy: false,
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+
+        scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
+
+        styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
+
+        fontSrc: ["'self'", "https://fonts.gstatic.com", "data:"],
+
+        imgSrc: ["'self'", "data:", "https:"],
+
+        connectSrc: [
+          "'self'",
+          "https://expense-tracker-backend-rv74.onrender.com",
+        ],
+      },
+    },
     crossOriginResourcePolicy: { policy: "cross-origin" },
   }),
 );
