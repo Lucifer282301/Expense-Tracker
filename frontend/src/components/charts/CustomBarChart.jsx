@@ -42,7 +42,8 @@ const CustomBarChart = ({ data }) => {
           <CartesianGrid stroke="none" />
 
           <XAxis
-            dataKey="category"
+            dataKey="month"
+            tickFormatter={(value) => value.split("-")[0]}
             tick={{ fontSize: 12, fill: "#555" }}
             stroke="none"
           />
